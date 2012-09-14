@@ -1,5 +1,5 @@
 \section{MySQL Schema}
-\begin{lstlisting}[breaklines]
+\begin{spverbatim}
 -- --------------------------------------------------
 -- Table `Person`
 -- --------------------------------------------------
@@ -186,11 +186,5 @@ CREATE  TABLE IF NOT EXISTS `Movie_has_Genre` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
-
-
-
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-\end{lstlisting}
+\end{spverbatim}
 \newpage

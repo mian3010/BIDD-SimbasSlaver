@@ -1,5 +1,6 @@
 \section{MySQL Schema}
-\begin{lstlisting}[language=sql]
+\begin{lstlisting}[breaklines]
+
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
@@ -7,9 +8,9 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci ;
 USE `mydb` ;
 
--- -----------------------------------------------------
+-- --------------------------------------------------
 -- Table `mydb`.`Person`
--- -----------------------------------------------------
+-- --------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `mydb`.`Person` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `Name` VARCHAR(45) NULL ,
@@ -19,9 +20,9 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`Person` (
 ENGINE = InnoDB;
 
 
--- -----------------------------------------------------
+-- --------------------------------------------------
 -- Table `mydb`.`Movie`
--- -----------------------------------------------------
+-- --------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `mydb`.`Movie` (
   `id` INT NOT NULL ,
   `Title` VARCHAR(45) NULL ,
@@ -29,9 +30,9 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`Movie` (
 ENGINE = InnoDB;
 
 
--- -----------------------------------------------------
+-- --------------------------------------------------
 -- Table `mydb`.`Genre`
--- -----------------------------------------------------
+-- --------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `mydb`.`Genre` (
   `id` INT NOT NULL ,
   `Name` VARCHAR(45) NULL ,
@@ -40,9 +41,9 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`Genre` (
 ENGINE = InnoDB;
 
 
--- -----------------------------------------------------
+-- --------------------------------------------------
 -- Table `mydb`.`Award`
--- -----------------------------------------------------
+-- --------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `mydb`.`Award` (
   `id` INT NOT NULL ,
   `Name` VARCHAR(45) NULL ,
@@ -51,9 +52,9 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`Award` (
 ENGINE = InnoDB;
 
 
--- -----------------------------------------------------
+-- --------------------------------------------------
 -- Table `mydb`.`Role`
--- -----------------------------------------------------
+-- --------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `mydb`.`Role` (
   `id` INT NOT NULL ,
   `Title` VARCHAR(45) NULL ,
@@ -61,9 +62,9 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`Role` (
 ENGINE = InnoDB;
 
 
--- -----------------------------------------------------
+-- --------------------------------------------------
 -- Table `mydb`.`Contract`
--- -----------------------------------------------------
+-- --------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `mydb`.`Contract` (
   `id` INT NOT NULL ,
   `Person_id` INT NOT NULL ,
@@ -91,9 +92,9 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`Contract` (
 ENGINE = InnoDB;
 
 
--- -----------------------------------------------------
+-- --------------------------------------------------
 -- Table `mydb`.`Rating`
--- -----------------------------------------------------
+-- --------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `mydb`.`Rating` (
   `id` INT NOT NULL ,
   `Rating` INT NULL ,
@@ -109,9 +110,9 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`Rating` (
 ENGINE = InnoDB;
 
 
--- -----------------------------------------------------
+-- --------------------------------------------------
 -- Table `mydb`.`Movie_has_Awards`
--- -----------------------------------------------------
+-- --------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `mydb`.`Movie_has_Awards` (
   `Movie_id` INT NOT NULL ,
   `Awards_id` INT NOT NULL ,
@@ -132,9 +133,9 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`Movie_has_Awards` (
 ENGINE = InnoDB;
 
 
--- -----------------------------------------------------
+-- --------------------------------------------------
 -- Table `mydb`.`Character`
--- -----------------------------------------------------
+-- --------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `mydb`.`Character` (
   `id` INT NOT NULL ,
   `Movie_id` INT NOT NULL ,
@@ -149,9 +150,9 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`Character` (
 ENGINE = InnoDB;
 
 
--- -----------------------------------------------------
+-- --------------------------------------------------
 -- Table `mydb`.`Character_has_Person`
--- -----------------------------------------------------
+-- --------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `mydb`.`Character_has_Person` (
   `Character_id` INT NOT NULL ,
   `Person_id` INT NOT NULL ,
@@ -173,9 +174,9 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`Character_has_Person` (
 ENGINE = InnoDB;
 
 
--- -----------------------------------------------------
+-- --------------------------------------------------
 -- Table `mydb`.`Movie_has_Genre`
--- -----------------------------------------------------
+-- --------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `mydb`.`Movie_has_Genre` (
   `Movie_id` INT NOT NULL ,
   `Genre_id` INT NOT NULL ,

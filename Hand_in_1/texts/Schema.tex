@@ -1,8 +1,8 @@
 \section{MySQL Schema}
 \begin{spverbatim}
--- --------------------------------------------------
+-- -----------------------------------------------------
 -- Table `Person`
--- --------------------------------------------------
+-- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `Person` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `Name` VARCHAR(45) NULL ,
@@ -12,9 +12,9 @@ CREATE  TABLE IF NOT EXISTS `Person` (
 ENGINE = InnoDB;
 
 
--- --------------------------------------------------
+-- -----------------------------------------------------
 -- Table `Movie`
--- --------------------------------------------------
+-- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `Movie` (
   `id` INT NOT NULL ,
   `Title` VARCHAR(45) NULL ,
@@ -22,9 +22,9 @@ CREATE  TABLE IF NOT EXISTS `Movie` (
 ENGINE = InnoDB;
 
 
--- --------------------------------------------------
+-- -----------------------------------------------------
 -- Table `Genre`
--- --------------------------------------------------
+-- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `Genre` (
   `id` INT NOT NULL ,
   `Name` VARCHAR(45) NULL ,
@@ -33,9 +33,9 @@ CREATE  TABLE IF NOT EXISTS `Genre` (
 ENGINE = InnoDB;
 
 
--- --------------------------------------------------
+-- -----------------------------------------------------
 -- Table `Award`
--- --------------------------------------------------
+-- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `Award` (
   `id` INT NOT NULL ,
   `Name` VARCHAR(45) NULL ,
@@ -44,9 +44,9 @@ CREATE  TABLE IF NOT EXISTS `Award` (
 ENGINE = InnoDB;
 
 
--- --------------------------------------------------
+-- -----------------------------------------------------
 -- Table `Role`
--- --------------------------------------------------
+-- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `Role` (
   `id` INT NOT NULL ,
   `Title` VARCHAR(45) NULL ,
@@ -54,9 +54,9 @@ CREATE  TABLE IF NOT EXISTS `Role` (
 ENGINE = InnoDB;
 
 
--- --------------------------------------------------
+-- -----------------------------------------------------
 -- Table `Contract`
--- --------------------------------------------------
+-- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `Contract` (
   `id` INT NOT NULL ,
   `Person_id` INT NOT NULL ,
@@ -84,9 +84,9 @@ CREATE  TABLE IF NOT EXISTS `Contract` (
 ENGINE = InnoDB;
 
 
--- --------------------------------------------------
+-- -----------------------------------------------------
 -- Table `Rating`
--- --------------------------------------------------
+-- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `Rating` (
   `id` INT NOT NULL ,
   `Rating` INT NULL ,
@@ -102,9 +102,9 @@ CREATE  TABLE IF NOT EXISTS `Rating` (
 ENGINE = InnoDB;
 
 
--- --------------------------------------------------
+-- -----------------------------------------------------
 -- Table `Movie_has_Awards`
--- --------------------------------------------------
+-- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `Movie_has_Awards` (
   `Movie_id` INT NOT NULL ,
   `Awards_id` INT NOT NULL ,
@@ -125,26 +125,19 @@ CREATE  TABLE IF NOT EXISTS `Movie_has_Awards` (
 ENGINE = InnoDB;
 
 
--- --------------------------------------------------
+-- -----------------------------------------------------
 -- Table `Character`
--- --------------------------------------------------
+-- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `Character` (
   `id` INT NOT NULL ,
-  `Movie_id` INT NOT NULL ,
   `Name` VARCHAR(45) NULL ,
-  INDEX `fk_Characters_Movie1_idx` (`Movie_id` ASC) ,
-  PRIMARY KEY (`id`) ,
-  CONSTRAINT `fk_Characters_Movie1`
-    FOREIGN KEY (`Movie_id` )
-    REFERENCES `Movie` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 
 
--- --------------------------------------------------
+-- -----------------------------------------------------
 -- Table `Character_has_Person`
--- --------------------------------------------------
+-- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `Character_has_Person` (
   `Character_id` INT NOT NULL ,
   `Person_id` INT NOT NULL ,
@@ -166,9 +159,9 @@ CREATE  TABLE IF NOT EXISTS `Character_has_Person` (
 ENGINE = InnoDB;
 
 
--- --------------------------------------------------
+-- -----------------------------------------------------
 -- Table `Movie_has_Genre`
--- --------------------------------------------------
+-- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `Movie_has_Genre` (
   `Movie_id` INT NOT NULL ,
   `Genre_id` INT NOT NULL ,
@@ -183,6 +176,28 @@ CREATE  TABLE IF NOT EXISTS `Movie_has_Genre` (
   CONSTRAINT `fk_Movie_has_Genre_Genre1`
     FOREIGN KEY (`Genre_id` )
     REFERENCES `Genre` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Movie_has_Character`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `Movie_has_Character` (
+  `Movie_id` INT NOT NULL ,
+  `Character_id` INT NOT NULL ,
+  PRIMARY KEY (`Movie_id`, `Character_id`) ,
+  INDEX `fk_Movie_has_Character_Character1_idx` (`Character_id` ASC) ,
+  INDEX `fk_Movie_has_Character_Movie1_idx` (`Movie_id` ASC) ,
+  CONSTRAINT `fk_Movie_has_Character_Movie1`
+    FOREIGN KEY (`Movie_id` )
+    REFERENCES `Movie` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Movie_has_Character_Character1`
+    FOREIGN KEY (`Character_id` )
+    REFERENCES `Character` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

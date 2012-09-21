@@ -18,6 +18,7 @@ ENGINE = InnoDB;
 CREATE  TABLE IF NOT EXISTS `Movie` (
   `id` INT NOT NULL ,
   `Title` VARCHAR(45) NULL ,
+  `Year` INT NOT NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 
@@ -62,6 +63,7 @@ CREATE  TABLE IF NOT EXISTS `Contract` (
   `Person_id` INT NOT NULL ,
   `Movie_id` INT NOT NULL ,
   `Role_id` INT NOT NULL ,
+  `Salary` VARCHAR(45) NOT NULL DEFAULT 0 ,
   PRIMARY KEY (`id`) ,
   INDEX `fk_Contract_Person1_idx` (`Person_id` ASC) ,
   INDEX `fk_Contract_Movie1_idx` (`Movie_id` ASC) ,
@@ -92,6 +94,7 @@ CREATE  TABLE IF NOT EXISTS `Rating` (
   `Rating` INT NULL ,
   `Description` TEXT NULL ,
   `Movie_id` INT NOT NULL ,
+  `Source` VARCHAR(45) NOT NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `fk_Rating_Movie1_idx` (`Movie_id` ASC) ,
   CONSTRAINT `fk_Rating_Movie1`
@@ -141,8 +144,6 @@ ENGINE = InnoDB;
 CREATE  TABLE IF NOT EXISTS `Character_has_Person` (
   `Character_id` INT NOT NULL ,
   `Person_id` INT NOT NULL ,
-  `Start` DATE NULL ,
-  `End` DATE NULL ,
   PRIMARY KEY (`Character_id`, `Person_id`) ,
   INDEX `fk_Character_has_Person_Person1_idx` (`Person_id` ASC) ,
   INDEX `fk_Character_has_Person_Character1_idx` (`Character_id` ASC) ,

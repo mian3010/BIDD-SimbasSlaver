@@ -1,0 +1,3 @@
+Rating: Movie_id, Source -> Rating_id
+Contract: Person_id, Movie_id, Role_id -> Contract_id
+Award: Award_year, Award_name -> Movie

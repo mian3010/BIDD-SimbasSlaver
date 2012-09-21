@@ -1,2 +1,25 @@
 \section{Analysis}
+
+We have considered the following scenerios, where one might doubt that our implementations is in normal form:
+
+Role:
+Q. Isnt there a FD between a Person_id and a Role_id to Movie_id in the contrat table? 
+A. We assume that a person can play more than one role per movie.
+
+
+Character:
+Q. Isnt there a FD between a character and a movie 
+A. We assume that a character can apaier in more than once in a movie.
+
+Q. Isnt there a FD between a person and a character
+A. More than one person can play one character in movie.
+
+
+Rating:
+
+Q. isnt ther a FD between Moive and source to rating
+A. YES. We assume that one source can only rate a movie once , else the rating is just editted
+A. But its unavoidable
+
 \newpage
+

@@ -1,9 +1,10 @@
 \section{Analysis}
+While going through our E/R model, we searched for FD to make sure that our model was in normal form.
   We have found the following functional dependencies:
   \begin{itemize}
-    \item Rating: Movie\_id, Source -> Rating\_id
-    \item Contract: Person\_id, Movie\_id, Role\_id -> Contract\_id
-    \item Award: Award\_year, Award\_name -> Movie
+    \item Rating: Movie\_id, Source
+    \item Contract: Person\_id, Movie\_id, Role\_id
+    \item Award: Award\_year, Award\_name
   \end{itemize}
   We have considered the following scenerios, where one might doubt that our implementations is in normal form: \\
   \subsection{Role}
@@ -27,5 +28,5 @@
     not worth mentioning.
     We have chosen to use IDs as primary keys on most of our entities. This
     makes our implementation very tight and aside from the IDs themselves, we
-    do not have many functional dependencies.
+    do not have many functional dependencies and consider the model to be in normal form.
 \newpage

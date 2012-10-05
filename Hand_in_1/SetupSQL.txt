@@ -2,6 +2,8 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
+CREATE SCHEMA IF NOT EXISTS `SimbasIMDB` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci ;
+USE `SimbasIMDB` ;
 
 -- -----------------------------------------------------
 -- Table `SimbasIMDB`.`Person`
@@ -111,9 +113,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `SimbasIMDB`.`Movie_has_Awards`
+-- Table `SimbasIMDB`.`Movie_has_Award`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `SimbasIMDB`.`Movie_has_Awards` (
+CREATE  TABLE IF NOT EXISTS `SimbasIMDB`.`Movie_has_Award` (
   `Movie_id` INT NOT NULL ,
   `Awards_id` INT NOT NULL ,
   `Year` INT NULL ,
@@ -215,6 +217,7 @@ ENGINE = InnoDB;
 CREATE  TABLE IF NOT EXISTS `SimbasIMDB`.`Person_has_Award` (
   `Person_id` INT NOT NULL ,
   `Award_id` INT NOT NULL ,
+  `Year` INT NULL ,
   PRIMARY KEY (`Person_id`, `Award_id`) ,
   INDEX `fk_Person_has_Award_Award1_idx` (`Award_id` ASC) ,
   INDEX `fk_Person_has_Award_Person1_idx` (`Person_id` ASC) ,

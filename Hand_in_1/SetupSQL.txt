@@ -1,0 +1,237 @@
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+
+-- -----------------------------------------------------
+-- Table `SimbasIMDB`.`Person`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `SimbasIMDB`.`Person` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `Name` VARCHAR(45) NULL ,
+  `DOB` DATE NULL ,
+  `DOD` DATE NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `SimbasIMDB`.`Movie`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `SimbasIMDB`.`Movie` (
+  `id` INT NOT NULL ,
+  `Title` VARCHAR(45) NOT NULL ,
+  `Year` INT NOT NULL ,
+  `Language` VARCHAR(45) NOT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `SimbasIMDB`.`Genre`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `SimbasIMDB`.`Genre` (
+  `id` INT NOT NULL ,
+  `Name` VARCHAR(45) NULL ,
+  `Description` TEXT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `SimbasIMDB`.`Award`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `SimbasIMDB`.`Award` (
+  `id` INT NOT NULL ,
+  `Name` VARCHAR(45) NULL ,
+  `Description` TEXT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `SimbasIMDB`.`Role`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `SimbasIMDB`.`Role` (
+  `id` INT NOT NULL ,
+  `Title` VARCHAR(45) NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `SimbasIMDB`.`Contract`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `SimbasIMDB`.`Contract` (
+  `id` INT NOT NULL ,
+  `Person_id` INT NOT NULL ,
+  `Movie_id` INT NOT NULL ,
+  `Role_id` INT NOT NULL ,
+  `Salary` VARCHAR(45) NOT NULL DEFAULT 0 ,
+  PRIMARY KEY (`id`) ,
+  INDEX `fk_Contract_Person1_idx` (`Person_id` ASC) ,
+  INDEX `fk_Contract_Movie1_idx` (`Movie_id` ASC) ,
+  INDEX `fk_Contract_Role1_idx` (`Role_id` ASC) ,
+  CONSTRAINT `fk_Contract_Person1`
+    FOREIGN KEY (`Person_id` )
+    REFERENCES `SimbasIMDB`.`Person` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Contract_Movie1`
+    FOREIGN KEY (`Movie_id` )
+    REFERENCES `SimbasIMDB`.`Movie` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Contract_Role1`
+    FOREIGN KEY (`Role_id` )
+    REFERENCES `SimbasIMDB`.`Role` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `SimbasIMDB`.`Rating`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `SimbasIMDB`.`Rating` (
+  `id` INT NOT NULL ,
+  `Rating` INT NOT NULL ,
+  `Description` TEXT NULL ,
+  `Movie_id` INT NOT NULL ,
+  `Source` VARCHAR(45) NOT NULL ,
+  `Timestamp` TIMESTAMP NOT NULL ,
+  PRIMARY KEY (`id`) ,
+  INDEX `fk_Rating_Movie1_idx` (`Movie_id` ASC) ,
+  CONSTRAINT `fk_Rating_Movie1`
+    FOREIGN KEY (`Movie_id` )
+    REFERENCES `SimbasIMDB`.`Movie` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `SimbasIMDB`.`Movie_has_Awards`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `SimbasIMDB`.`Movie_has_Awards` (
+  `Movie_id` INT NOT NULL ,
+  `Awards_id` INT NOT NULL ,
+  `Year` INT NULL ,
+  PRIMARY KEY (`Movie_id`, `Awards_id`) ,
+  INDEX `fk_Movie_has_Awards_Awards1_idx` (`Awards_id` ASC) ,
+  INDEX `fk_Movie_has_Awards_Movie1_idx` (`Movie_id` ASC) ,
+  CONSTRAINT `fk_Movie_has_Awards_Movie1`
+    FOREIGN KEY (`Movie_id` )
+    REFERENCES `SimbasIMDB`.`Movie` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Movie_has_Awards_Awards1`
+    FOREIGN KEY (`Awards_id` )
+    REFERENCES `SimbasIMDB`.`Award` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `SimbasIMDB`.`Character`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `SimbasIMDB`.`Character` (
+  `id` INT NOT NULL ,
+  `Name` VARCHAR(45) NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `SimbasIMDB`.`Character_has_Person`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `SimbasIMDB`.`Character_has_Person` (
+  `Character_id` INT NOT NULL ,
+  `Person_id` INT NOT NULL ,
+  PRIMARY KEY (`Character_id`, `Person_id`) ,
+  INDEX `fk_Character_has_Person_Person1_idx` (`Person_id` ASC) ,
+  INDEX `fk_Character_has_Person_Character1_idx` (`Character_id` ASC) ,
+  CONSTRAINT `fk_Character_has_Person_Character1`
+    FOREIGN KEY (`Character_id` )
+    REFERENCES `SimbasIMDB`.`Character` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Character_has_Person_Person1`
+    FOREIGN KEY (`Person_id` )
+    REFERENCES `SimbasIMDB`.`Person` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `SimbasIMDB`.`Movie_has_Genre`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `SimbasIMDB`.`Movie_has_Genre` (
+  `Movie_id` INT NOT NULL ,
+  `Genre_id` INT NOT NULL ,
+  PRIMARY KEY (`Movie_id`, `Genre_id`) ,
+  INDEX `fk_Movie_has_Genre_Genre1_idx` (`Genre_id` ASC) ,
+  INDEX `fk_Movie_has_Genre_Movie1_idx` (`Movie_id` ASC) ,
+  CONSTRAINT `fk_Movie_has_Genre_Movie1`
+    FOREIGN KEY (`Movie_id` )
+    REFERENCES `SimbasIMDB`.`Movie` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Movie_has_Genre_Genre1`
+    FOREIGN KEY (`Genre_id` )
+    REFERENCES `SimbasIMDB`.`Genre` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `SimbasIMDB`.`Movie_has_Character`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `SimbasIMDB`.`Movie_has_Character` (
+  `Movie_id` INT NOT NULL ,
+  `Character_id` INT NOT NULL ,
+  PRIMARY KEY (`Movie_id`, `Character_id`) ,
+  INDEX `fk_Movie_has_Character_Character1_idx` (`Character_id` ASC) ,
+  INDEX `fk_Movie_has_Character_Movie1_idx` (`Movie_id` ASC) ,
+  CONSTRAINT `fk_Movie_has_Character_Movie1`
+    FOREIGN KEY (`Movie_id` )
+    REFERENCES `SimbasIMDB`.`Movie` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Movie_has_Character_Character1`
+    FOREIGN KEY (`Character_id` )
+    REFERENCES `SimbasIMDB`.`Character` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `SimbasIMDB`.`Person_has_Award`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `SimbasIMDB`.`Person_has_Award` (
+  `Person_id` INT NOT NULL ,
+  `Award_id` INT NOT NULL ,
+  PRIMARY KEY (`Person_id`, `Award_id`) ,
+  INDEX `fk_Person_has_Award_Award1_idx` (`Award_id` ASC) ,
+  INDEX `fk_Person_has_Award_Person1_idx` (`Person_id` ASC) ,
+  CONSTRAINT `fk_Person_has_Award_Person1`
+    FOREIGN KEY (`Person_id` )
+    REFERENCES `SimbasIMDB`.`Person` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Person_has_Award_Award1`
+    FOREIGN KEY (`Award_id` )
+    REFERENCES `SimbasIMDB`.`Award` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

@@ -23,7 +23,7 @@ ENGINE = InnoDB;
 -- Table `SimbasIMDB`.`Movie`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `SimbasIMDB`.`Movie` (
-  `id` INT NOT NULL ,
+  `id` INT NOT NULL AUTO_INCREMENT ,
   `Title` VARCHAR(45) NOT NULL ,
   `Year` INT NOT NULL ,
   `Language` VARCHAR(45) NOT NULL ,
@@ -36,7 +36,7 @@ ENGINE = InnoDB;
 -- Table `SimbasIMDB`.`Genre`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `SimbasIMDB`.`Genre` (
-  `id` INT NOT NULL ,
+  `id` INT NOT NULL AUTO_INCREMENT ,
   `Name` VARCHAR(45) NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
@@ -46,7 +46,7 @@ ENGINE = InnoDB;
 -- Table `SimbasIMDB`.`Award`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `SimbasIMDB`.`Award` (
-  `id` INT NOT NULL ,
+  `id` INT NOT NULL AUTO_INCREMENT ,
   `Name` VARCHAR(45) NULL ,
   `Description` TEXT NULL ,
   PRIMARY KEY (`id`) )
@@ -57,7 +57,7 @@ ENGINE = InnoDB;
 -- Table `SimbasIMDB`.`Role`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `SimbasIMDB`.`Role` (
-  `id` INT NOT NULL ,
+  `id` INT NOT NULL AUTO_INCREMENT ,
   `Title` VARCHAR(45) NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
@@ -67,7 +67,7 @@ ENGINE = InnoDB;
 -- Table `SimbasIMDB`.`Contract`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `SimbasIMDB`.`Contract` (
-  `id` INT NOT NULL ,
+  `id` INT NOT NULL AUTO_INCREMENT ,
   `Person_id` INT NOT NULL ,
   `Movie_id` INT NOT NULL ,
   `Role_id` INT NOT NULL ,
@@ -97,7 +97,7 @@ ENGINE = InnoDB;
 -- Table `SimbasIMDB`.`Rating`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `SimbasIMDB`.`Rating` (
-  `id` INT NOT NULL ,
+  `id` INT NOT NULL AUTO_INCREMENT ,
   `Rating` INT NOT NULL ,
   `Description` TEXT NULL ,
   `Movie_id` INT NOT NULL ,

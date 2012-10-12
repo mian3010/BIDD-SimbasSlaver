@@ -16,7 +16,7 @@ USE `SimbasIMDB` ;
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `SimbasIMDB`.`Person` (
   `id` INT NOT NULL AUTO_INCREMENT ,
-  `Name` VARCHAR(45) NULL ,
+  `Name` VARCHAR(220) NULL ,
   `DOB` DATE NULL ,
   `DOD` DATE NULL ,
   `Gender` VARCHAR(45) NULL ,
@@ -30,9 +30,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `SimbasIMDB`.`Movie` (
   `id` INT NOT NULL AUTO_INCREMENT ,
-  `Title` VARCHAR(45) NOT NULL ,
+  `Title` VARCHAR(200) NOT NULL ,
   `Year` INT NOT NULL ,
-  `Language` VARCHAR(45) NOT NULL ,
+  `Language` VARCHAR(45) NULL ,
   `ImdbVotes` INT NULL ,
   `Color` VARCHAR(45) NULL ,
   `Country` VARCHAR(45) NULL ,
@@ -48,7 +48,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `SimbasIMDB`.`Genre` (
   `id` INT NOT NULL AUTO_INCREMENT ,
-  `Name` VARCHAR(45) NULL ,
+  `Name` VARCHAR(220) NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 
@@ -58,7 +58,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `SimbasIMDB`.`Award` (
   `id` INT NOT NULL AUTO_INCREMENT ,
-  `Name` VARCHAR(45) NULL ,
+  `Name` VARCHAR(220) NULL ,
   `Description` TEXT NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
@@ -69,7 +69,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `SimbasIMDB`.`Role` (
   `id` INT NOT NULL AUTO_INCREMENT ,
-  `Title` VARCHAR(45) NULL ,
+  `Title` VARCHAR(200) NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 
@@ -104,6 +104,7 @@ ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `SimbasIMDB`.`Rating`
+-- -----------------------------------------------------
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `SimbasIMDB`.`Rating` (
   `id` INT NOT NULL AUTO_INCREMENT ,
@@ -236,7 +237,7 @@ INSERT INTO Movie_has_Movie (From_id, To_id) SELECT fromId AS From_id, toId AS t
 INSERT INTO Movie_has_Genre (Movie_id, Genre_id) SELECT DISTINCT movieId as Movie_id, (SELECT id FROM Genre WHERE Name=genre) as Genre_id FROM imdb_new.genre;
 
 -- Person:
-INSERT INTO Person (id, Name, DOB, DOD, Gender, Height) SELECT id AS id, name AS Name, gender AS Gender, birthdate AS DOB, deathdate AS DOD, height AS Height FROM imdb_new.person;
+INSERT INTO Person (id, Name, DOB, DOD, Gender, Height) SELECT id AS id, name AS Name, birthdate AS DOB, deathdate AS DOD, gender AS Gender, height AS Height FROM imdb_new.person;
 
 -- Contract:
 INSERT INTO Contract (Person_id, Movie_id, Role_id) SELECT personId AS Person_id, movieId as Movie_id, (SELECT id FROM Role WHERE role=Title) as Role_id FROM imdb_new.involved;

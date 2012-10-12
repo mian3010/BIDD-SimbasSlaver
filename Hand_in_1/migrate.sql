@@ -1,6 +1,8 @@
-### This will create tables and copy data from an IMDB database
+### This will create tables and copy data from an IMDB database 
 ### To run this you need to have a database by the name of imdb_new
 ### imdb_new is available at learnit.itu.dk under the name imdb.sql
+
+### Setup new database ###
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
@@ -207,13 +209,14 @@ CREATE  TABLE IF NOT EXISTS `SimbasIMDB`.`Movie_has_Movie` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-
-
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
--- Oour imports
+
+### Copy data to new database ###
+
+-- Our imports
 -- Role:
 INSERT INTO Role (Title) SELECT DISTINCT role AS Title FROM imdb_new.involved;
 

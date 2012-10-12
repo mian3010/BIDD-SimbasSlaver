@@ -1,3 +1,7 @@
+### This will create tables and copy data from an IMDB database
+### To run this you need to have a database by the name of imdb_new
+### imdb_new is available at learnit.itu.dk under the name imdb.sql
+
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';

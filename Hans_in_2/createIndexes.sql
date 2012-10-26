@@ -1,6 +1,6 @@
 /*1*/
-create index landex on Movie(Language)
+create index landex on Movie(Language);
 
-/*2*/
+/*3and4*/
+create index perdex on Person(Name);
 
-/*3*/

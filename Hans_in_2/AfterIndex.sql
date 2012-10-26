@@ -25,4 +25,24 @@ where tempid.movieid =Movie.id;
 explain Select count(distinct name) from Person where name like "Q%";
 Select count(distinct name) from Person where name like "Q%";
 
-/*5*/
+/*6*/
+explain Select name,DOB from Person
+Inner join
+(select Person_id from Contract where Contract.movie_id=
+    (Select id from Movie where title="Pulp fiction")) as perid
+on Person.id=perid.person_id;
+order by DOB
+
+Select name,DOB from Person
+Inner join
+(select Person_id from Contract where Contract.movie_id=
+    (Select id from Movie where title="Pulp fiction")) as perid
+on Person.id=perid.person_id
+order by DOB;
+
+/*8*/
+explain Select Title, imdbrank as Rank
+from Movie where year>=1990 and year<2000 order by imdbrank desc limit 5;
+
+Select Title, imdbrank as Rank
+from Movie where year>=1990 and year<2000 order by imdbrank desc limit 5;

@@ -1,0 +1,21 @@
+Checks we need to do for cleaning
+
+Legal:
+- Fields are not null and not blank.
+- Key in one table exists in reference table
+
+movieGenre:
+  genreId is legal
+  movieId is legal
+
+rating:
+  userId is legal
+  movieId is legal
+  rating is legal (1-5)
+  time is legal
+
+user:
+  gender is legal
+  age is legal
+  occupation is legal
+  zip is legal

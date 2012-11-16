@@ -30,8 +30,8 @@ explain Select name,DOB from Person
 Inner join
 (select Person_id from Contract where Contract.movie_id=
     (Select id from Movie where title="Pulp fiction")) as perid
-on Person.id=perid.person_id;
-order by DOB
+on Person.id=perid.person_id
+order by DOB;
 
 Select name,DOB from Person
 Inner join

@@ -1,0 +1,147 @@
++----+-------------+-------+------+---------------+--------+---------+-------+------+-------------+
+| id | select_type | table | type | possible_keys | key    | key_len | ref   | rows | Extra       |
++----+-------------+-------+------+---------------+--------+---------+-------+------+-------------+
+|  1 | SIMPLE      | Movie | ref  | landex        | landex | 48      | const |  418 | Using where |
++----+-------------+-------+------+---------------+--------+---------+-------+------+-------------+
+1 row in set (0.00 sec)
+
++-----------------------+
+| count(distinct title) |
++-----------------------+
+|                   417 |
++-----------------------+
+1 row in set (0.00 sec)
+
++----+-------------+------------+--------+--------------------------------+---------+---------+----------------+------+--------------------------------+
+| id | select_type | table      | type   | possible_keys                  | key     | key_len | ref            | rows | Extra                          |
++----+-------------+------------+--------+--------------------------------+---------+---------+----------------+------+--------------------------------+
+|  1 | PRIMARY     | <derived2> | ALL    | NULL                           | NULL    | NULL    | NULL           |   21 |                                |
+|  1 | PRIMARY     | Movie      | eq_ref | PRIMARY                        | PRIMARY | 4       | tempid.Movieid |    1 |                                |
+|  2 | DERIVED     | <derived5> | ALL    | NULL                           | NULL    | NULL    | NULL           |   69 |                                |
+|  2 | DERIVED     | <derived3> | ALL    | NULL                           | NULL    | NULL    | NULL           |  114 | Using where; Using join buffer |
+|  5 | DERIVED     | Contract   | ref    | fk_Contract_Person1_idx,condex | condex  | 4       |                |    6 | Using where                    |
+|  6 | SUBQUERY    | Person     | ref    | perdex                         | perdex  | 223     |                |    1 | Using where; Using index       |
+|  3 | DERIVED     | Contract   | ref    | fk_Contract_Person1_idx,condex | condex  | 4       |                |    6 | Using where                    |
+|  4 | SUBQUERY    | Person     | ref    | perdex                         | perdex  | 223     |                |    1 | Using where; Using index       |
++----+-------------+------------+--------+--------------------------------+---------+---------+----------------+------+--------------------------------+
+8 rows in set (0.00 sec)
+
++----------------------------------------------------+
+| title                                              |
++----------------------------------------------------+
+| "Wetten, dass..?"                                  |
+| "The Oprah Winfrey Show"                           |
+| "Entertainment Tonight"                            |
+| "Good Morning America"                             |
+| "Late Show with David Letterman"                   |
+| "The Tonight Show with Jay Leno"                   |
+| "E! True Hollywood Story"                          |
+| "Live with Regis and Kathie Lee"                   |
+| "The Charlie Rose Show"                            |
+| "The Rosie O'Donnell Show"                         |
+| "Ellen: The Ellen DeGeneres Show"                  |
+| You're Still Not Fooling Anybody                   |
+| "HBO First Look"                                   |
+| Midnight Movies: From the Margin to the Mainstream |
+| Be Cool                                            |
+| "The Paul O'Grady Show"                            |
+| Pulp Fiction                                       |
+| Boffo! Tinseltown's Bombs and Blockbusters         |
+| "Friday Night with Jonathan Ross"                  |
+| "The View"                                         |
+| "GMTV"                                             |
++----------------------------------------------------+
+21 rows in set (0.00 sec)
+
++----+-------------+--------+-------+---------------+--------+---------+------+------+---------------------------------------+
+| id | select_type | table  | type  | possible_keys | key    | key_len | ref  | rows | Extra                                 |
++----+-------------+--------+-------+---------------+--------+---------+------+------+---------------------------------------+
+|  1 | SIMPLE      | Person | range | perdex        | perdex | 223     | NULL |    1 | Using where; Using index for group-by |
++----+-------------+--------+-------+---------------+--------+---------+------+------+---------------------------------------+
+1 row in set (0.00 sec)
+
++----------------------+
+| count(distinct name) |
++----------------------+
+|                  153 |
++----------------------+
+1 row in set (0.00 sec)
+
++----+-------------+------------+--------+------------------------+------------------------+---------+-----------------+------+---------------------------------+
+| id | select_type | table      | type   | possible_keys          | key                    | key_len | ref             | rows | Extra                           |
++----+-------------+------------+--------+------------------------+------------------------+---------+-----------------+------+---------------------------------+
+|  1 | PRIMARY     | <derived2> | ALL    | NULL                   | NULL                   | NULL    | NULL            |   45 | Using temporary; Using filesort |
+|  1 | PRIMARY     | Person     | eq_ref | PRIMARY                | PRIMARY                | 4       | perid.Person_id |    1 |                                 |
+|  2 | DERIVED     | Contract   | ref    | fk_Contract_Movie1_idx | fk_Contract_Movie1_idx | 4       |                 |   45 | Using where                     |
+|  3 | SUBQUERY    | Movie      | ref    | titdex                 | titdex                 | 202     |                 |    1 | Using where; Using index        |
++----+-------------+------------+--------+------------------------+------------------------+---------+-----------------+------+---------------------------------+
+4 rows in set (0.00 sec)
+
++---------------------+------------+
+| name                | DOB        |
++---------------------+------------+
+| Venessia Valentino  | NULL       |
+| Devin Marcus Miller | NULL       |
+| Sophie Griffiths    | NULL       |
+| Linda Kaye          | NULL       |
+| Angel Star Jones    | NULL       |
+| Rian Turner         | NULL       |
+| Emett Clark         | NULL       |
+| Terry Roth          | NULL       |
+| Stephen Hibbert     | NULL       |
+| Patricio Calderon   | NULL       |
+| Richard Ruth        | NULL       |
+| Caleb Allen         | NULL       |
+| Samadu Jackson      | NULL       |
+| Peggy Greene        | NULL       |
+| Brad Blumenthal     | NULL       |
+| Don Blakely         | NULL       |
+| Glendon Rich        | NULL       |
+| Bronagh Gallagher   | NULL       |
+| Emil Sitka          | 1914-12-22 |
+| Harvey Keitel       | 1939-05-13 |
+| Rene Beard          | 1941-06-03 |
+| Christopher Walken  | 1943-03-31 |
+| Joseph Pilato       | 1949-03-16 |
+| Brenda Hillhouse    | 1953-12-11 |
+| John Travolta       | 1954-02-18 |
+| Bruce Willis        | 1955-03-19 |
+| Amanda Plummer      | 1957-03-23 |
+| Lawrence Bender     | 1957-10-17 |
+| Steve Buscemi       | 1957-12-13 |
+| Karen Maruyama      | 1958-05-29 |
+| Ving Rhames         | 1959-05-12 |
+| Duane Whitaker      | 1959-06-23 |
+| Rosanna Arquette    | 1959-08-10 |
+| Julia Sweeney       | 1959-10-10 |
+| Kathy Griffin       | 1960-11-04 |
+| Eric Stoltz         | 1961-09-30 |
+| Michael Gilden      | 1962-09-22 |
+| Quentin Tarantino   | 1963-03-27 |
+| Quentin Tarantino   | 1963-03-27 |
+| Frank Whaley        | 1963-07-20 |
+| Maria de Medeiros   | 1965-08-19 |
+| Burr Steers         | 1965-10-08 |
+| Phil LaMarr         | 1967-01-24 |
+| Alexis Arquette     | 1969-07-28 |
+| Uma Thurman         | 1970-04-29 |
++---------------------+------------+
+45 rows in set (0.00 sec)
+
++----+-------------+-------+-------+---------------+--------+---------+------+------+-----------------------------+
+| id | select_type | table | type  | possible_keys | key    | key_len | ref  | rows | Extra                       |
++----+-------------+-------+-------+---------------+--------+---------+------+------+-----------------------------+
+|  1 | SIMPLE      | Movie | range | yeadex        | yeadex | 4       | NULL | 9930 | Using where; Using filesort |
++----+-------------+-------+-------+---------------+--------+---------+------+------+-----------------------------+
+1 row in set (0.00 sec)
+
++----------------------------------------------------------------------+------+
+| Title                                                                | Rank |
++----------------------------------------------------------------------+------+
+| "The Civil War"                                                      |  9.4 |
+| The Men Who Danced: The story of Ted Shawn's Male Dancers; 1933-1940 |  9.4 |
+| "Byomekesh Bakshi"                                                   |  9.4 |
+| "The Beatles Anthology"                                              |  9.4 |
+| "F¾stbrµ­ur"                                                         |  9.4 |
++----------------------------------------------------------------------+------+
+5 rows in set (0.03 sec)

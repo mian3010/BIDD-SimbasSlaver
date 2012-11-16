@@ -26,6 +26,12 @@ Clean user:
   DELETE FROM user WHERE age > 120;
   DELETE FROM user WHERE 0 = (SELECT COUNT(*) FROM occupation WHERE occupation.id = user.occupation);
   DELETE FROM user WHERE gender != 'F' AND gender != 'M';
+  UPDATE user SET age = 9 WHERE age =1;
+  UPDATE user SET age = 21 WHERE age =18;
+  UPDATE user SET age = 29 WHERE age =25;
+  UPDATE user SET age = 39 WHERE age = 35;
+  UPDATE user SET age = 49 WHERE age =45;
+  UPDATE user SET age = 69 WHERE age =56;
 
 Clean movieGenre:
   DELETE FROM movieGenre WHERE 0 = (SELECT COUNT(*) FROM genre WHERE genre.id = movieGenre.genreId);

@@ -19,3 +19,21 @@ user:
   age is legal
   occupation is legal
   zip is legal
+
+Clean user:
+  ALTER TABLE zipcode ADD PRIMARY KEY(zip);
+  DELETE FROM user WHERE 0 = (SELECT COUNT(*) FROM zipcode WHERE zipcode.zip = user.zip);
+  DELETE FROM user WHERE age > 120;
+  DELETE FROM user WHERE 0 = (SELECT COUNT(*) FROM occupation WHERE occupation.id = user.occupation);
+  DELETE FROM user WHERE gender != 'F' AND gender != 'M';
+
+Clean movieGenre:
+  DELETE FROM movieGenre WHERE 0 = (SELECT COUNT(*) FROM genre WHERE genre.id = movieGenre.genreId);
+  DELETE FROM movieGenre WHERE 0 = (SELECT COUNT(*) FROM movie WHERE movie.id = movieGenre.movieId);
+ 
+Clean rating:
+  ALTER TABLE user ADD PRIMARY KEY(id);
+  DELETE FROM rating WHERE 0 = (SELECT COUNT(*) FROM user WHERE user.id = rating.userId);
+  DELETE FROM rating WHERE 0 = (SELECT COUNT(*) FROM movie WHERE movie.id = rating.movieId);
+  DELETE FROM rating WHERE rating < 1 OR rating > 5;
+  DELETE FROM rating WHERE time IS NULL;

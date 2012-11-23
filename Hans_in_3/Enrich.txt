@@ -1,0 +1,2 @@
+Create table meanZip(zip int, mean double, pop double, primary key (zip));
+LOAD DATA LOCAL INFILE "filepath" into table meanZip fields terminated by '"seperator"'; 

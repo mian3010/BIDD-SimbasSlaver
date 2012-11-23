@@ -1,0 +1,9 @@
+\section{OLAP}
+\begin{spverbatim}
+### Rating by age ###
+# One might want to know the average rating by a specific age group
+
+CREATE TABLE averageRatingByAge(age INT, movieId INT, averageRating DOUBLE, PRIMARY KEY (age, movieId));
+INSERT INTO averageRatingByAge (age, movieId, averageRating) SELECT user.age, rating.movieId, AVG(rating.rating) FROM rating JOIN user ON rating.userId = user.id GROUP BY user.age, rating.movieId;
+\end{spverbatim}
+\newpage

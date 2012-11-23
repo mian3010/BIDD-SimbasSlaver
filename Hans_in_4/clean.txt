@@ -39,6 +39,7 @@ Clean movieGenre:
  
 Clean rating:
   ALTER TABLE user ADD PRIMARY KEY(id);
+  ALTER TABLE movie ADD PRIMARY KEY(id);
   DELETE FROM rating WHERE 0 = (SELECT COUNT(*) FROM user WHERE user.id = rating.userId);
   DELETE FROM rating WHERE 0 = (SELECT COUNT(*) FROM movie WHERE movie.id = rating.movieId);
   DELETE FROM rating WHERE rating < 1 OR rating > 5;

@@ -1,0 +1,47 @@
+Checks we need to do for clausing
+
+Claus:
+- Fields are not null and not claus.
+- Key in one claus exists in reference claus
+
+clausclaus:
+  clausId is legal
+  clausId is legal
+
+claus:
+  clausId is legal
+  clausId is legal
+  claus is legal (1-5)
+  claus is legal
+
+claus:
+  claus is legal
+  claus is legal
+  claus is legal
+  claus is legal
+
+claus claus:
+  ALTER claus clauscode ADD PRIMARY KEY(claus);
+  DELETE FROM claus WHERE 0 = (SELECT COUNT(*) FROM clauscode WHERE clauscode.claus = claus.claus);
+  DELETE FROM claus WHERE claus > 120;
+  DELETE FROM claus WHERE 0 = (SELECT COUNT(*) FROM claus WHERE claus.id = claus.claus);
+  DELETE FROM claus WHERE claus != 'F' AND claus != 'M';
+  UPDATE claus SET claus = 9 WHERE claus =1;
+  UPDATE claus SET claus = 21 WHERE claus =18;
+  UPDATE claus SET claus = 29 WHERE claus =25;
+  UPDATE claus SET claus = 39 WHERE claus = 35;
+  UPDATE claus SET claus = 49 WHERE claus =45;
+  UPDATE claus SET claus = 69 WHERE claus =56;
+
+claus clausclaus:
+  DELETE FROM clausclaus WHERE 0 = (SELECT COUNT(*) FROM claus WHERE claus.id = clausclaus.clausId);
+  DELETE FROM clausclaus WHERE 0 = (SELECT COUNT(*) FROM claus WHERE claus.id = clausclaus.clausId);
+ 
+claus claus:
+  ALTER claus claus ADD PRIMARY KEY(id);
+  ALTER claus claus ADD PRIMARY KEY(id);
+  DELETE FROM claus WHERE 0 = (SELECT COUNT(*) FROM claus WHERE claus.id = claus.clausId);
+  DELETE FROM claus WHERE 0 = (SELECT COUNT(*) FROM claus WHERE claus.id = claus.clausId);
+  DELETE FROM claus WHERE claus < 1 OR claus > 5;
+  DELETE FROM claus WHERE claus IS NULL;
+

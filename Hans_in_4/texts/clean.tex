@@ -1,3 +1,5 @@
+\section{Cleaning}
+\begin{spverbatim}
 Checks we need to do for cleaning
 
 Legal:
@@ -44,3 +46,5 @@ Clean rating:
   DELETE FROM rating WHERE 0 = (SELECT COUNT(*) FROM movie WHERE movie.id = rating.movieId);
   DELETE FROM rating WHERE rating < 1 OR rating > 5;
   DELETE FROM rating WHERE time IS NULL;
+  \end{spverbatim}
+  \newpage

@@ -1,5 +1,4 @@
 \section{OLAP}
-\subsection{Rating by age}
 Using two facts from two dimensions, we wish to measure the average rating by
 age groups.\\
 We create a table with the collumns age, moviieId and averageRating. We use age
@@ -13,5 +12,52 @@ PRIMARY KEY (age, movieId));
 INSERT INTO averageRatingByAge (age, movieId, averageRating) SELECT user.age,
 rating.movieId, AVG(rating.rating) FROM rating JOIN user ON rating.userId =
 user.id GROUP BY user.age, rating.movieId;
+
+"Old taste is good taste"
+Which age group like bad movies best?
+
+$Preagrigate avg movie ratings, rated over 40 times
+CREATE TABLE avgMovie(id INT, avgrating double, PRIMARY KEY (id));
+INSERT INTO avgMovie (id,avgrating) select movieid ,avg(rating) from rating group by movieid having count(rating) > 40
+
+$Preagrigate bad movies, movies with avg ratign under 3
+Create table badMovies(id int, avgRating double, primary key (id));
+insert into badMovies(id,avgRating) select * from avgMovie where avgRating < 3;
+
+$Preagrigate user that likes bad movies; voted 4 or over on 10 or more badmovies
+create table badUsers(id int, primary key (id));
+insert into badUsers(id) select userId from rating, badmovies where movieId = id and rating >= 4 group by userId having count(userId) >= 10;
+
+Fact: UserID,avgMovieRating,UserRating,UserAge,UserOccupation,UserGender
+Dimension: User,Movie,Rating,Occupation
+Measure: The following the quries
+
+$Calculate the procent of age groupes that like bad movies
+Select bad.age, bad.numb/user.numb*100 from 
+	(select age,count(user.id) as numb from badusers, user where user.id = badusers.id group by age) as bad,
+	(select age,count(user.id) as numb from user group by age) as user
+	where user.age = bad.age;
+
+$Calculate the procent of occupation
+Select occ.description, bad.numb/user.numb*100 as procent from 
+	(select occupation,count(user.id) as numb from badusers, user where user.id = badusers.id group by occupation) as bad,
+	(select occupation,count(user.id) as numb from user group by occupation) as user,
+	(select id,description from occupation ) as occ
+	where user.occupation = bad.occupation and user.occupation = occ.id
+	order by procent;
+
+$Calculate the procent of gender
+Select bad.gender, bad.numb/user.numb*100 from 
+	(select gender,count(user.id) as numb from badusers, user where user.id = badusers.id group by gender) as bad,
+	(select gender,count(user.id) as numb from user group by gender) as user
+	where user.gender = bad.gender;
+
+$Calculate the the baddest movie among user who like bad movies;
+Select movieId, avg(rating) as a, count(rating) as c from badusers,rating
+	where id = userId
+	group by movieId
+	having c > 40
+	order by a
+	limit 10;
 \end{spverbatim}
 \newpage
